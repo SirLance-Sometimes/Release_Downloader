@@ -76,6 +76,7 @@ function get-filedownload {
         $path = $folder + "\"
     }
     foreach($file in $fileList.files){
+        #todo This should be a check agaisn't a list from the configuration file, an exclude list.
         if($file.filename -ne "final.txt"){
             $temp_path = $path + $file.filename
             $request = $file.download_url
