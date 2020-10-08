@@ -1,3 +1,4 @@
 *.exe
 *.back
 amonguscapture\*
+parameters.json
