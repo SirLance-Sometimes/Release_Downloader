@@ -18,8 +18,6 @@ function main {
         else {
             Write-Information $repo.repository + " has not been updated."
         }
-        #update config file / write to disk
-        
     }
     update-config $config
 }
