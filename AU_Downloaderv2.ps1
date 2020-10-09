@@ -6,14 +6,12 @@ function main {
         Write-debug "repo data debug"
         write-debug "Repo files:" + $repoData.files
         write-debug "Repo data:" + $repoData
-        #pause
         if ($repoData.version -ne $repo.version ){                           # check if version is different
             Write-Information $repo.repository + " has been updated."
             get-filedownload -fileList $repoData -folder $repo.folder   # downloads the files and writes them to disk
             Write-debug "repo version before update:" + $repo.version
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
             Write-Debug "repo version after update: " + $repo.version
-            #pause
         }
         else {
             Write-Information $repo.repository + " has not been updated."
