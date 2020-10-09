@@ -1,12 +1,14 @@
 function main {
     $config = get-confiugration
     foreach ($repo in $config.items){
+        Write-Information "Checking repo: " + $repo.repository
         $repoData = get-repoData $repo
         #Write-Host "repo data debug"
         #write-host $repoData.files
         #write-host $repoData
         #pause
         if ($repoData.version -ne $repo.version ){                           # check if version is different
+            Write-Information $repo.repository + " has been updated."
             get-filedownload -fileList $repoData -folder $repo.folder   # downloads the files and writes them to disk
             #Write-Host $repo.version
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
