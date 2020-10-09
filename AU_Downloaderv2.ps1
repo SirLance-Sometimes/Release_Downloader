@@ -15,6 +15,9 @@ function main {
             #Write-Host $repo.version
             #pause
         }
+        else {
+            Write-Information $repo.repository + " has not been updated."
+        }
         #update config file / write to disk
         
     }
