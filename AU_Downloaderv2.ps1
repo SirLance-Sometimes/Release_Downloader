@@ -21,10 +21,13 @@ function main {
 
 function get-confiugration {
     try {
-        return Get-Content parameters.json | ConvertFrom-Json
+        $content = Get-Content parameters.json | ConvertFrom-Json
+        Write-Information "Configuration file parameters.json found and loaded"
+        return $content
     }
     catch [System.Management.Automation.ItemNotFoundException] {
         # if not found create a new configuration file
+        Write-Information "Configuration file not found"
     }
     
 }
