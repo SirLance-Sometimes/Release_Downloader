@@ -8,7 +8,7 @@ function main {
         #write-debug "Repo data:" + $repoData
         if ($repoData.version -ne $repo.version ){                           # check if version is different
             #Write-Information $repo.repository + " has been updated."
-            get-filedownload -fileList $repoData -folder $repo.folder   # downloads the files and writes them to disk
+            get-filedownload -fileList $repoData -folder $repo.folder -exclude $repo.exclude  # downloads the files and writes them to disk
             #Write-debug "repo version before update:" + $repo.version
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
             #Write-Debug "repo version after update: " + $repo.version
@@ -22,7 +22,7 @@ function main {
 
 function get-confiugration {
     try {
-        $content = Get-Content parameters.json -ErrorAction Stop | ConvertFrom-Json 
+        $content = Get-Content parameters.json -ErrorAction Stop | ConvertFrom-Json
         Write-Information "Configuration file parameters.json found and loaded"
         return $content
     }
@@ -93,7 +93,8 @@ function parse-repoItems {
 function get-filedownload {
     param (
         [psobject]$fileList,
-        [string]$folder
+        [string]$folder,
+        [string[]]$exclude
     )
     if($folder -eq ""){
         $path = ""
@@ -103,7 +104,9 @@ function get-filedownload {
     }
     foreach($file in $fileList.files){
         #todo This should be a check agaisn't a list from the configuration file, an exclude list.
-        if($file.filename -ne "final.txt"){
+        #write-host $file.filename
+        #write-host $exclude
+        if( -not ($exclude -contains $file.filename)){
             $temp_path = $path + $file.filename
             $request = $file.download_url
             #Write-Host $file.download_url
@@ -117,6 +120,8 @@ function update-config {
         [psobject]$config
     )
     Move-Item parameters.json parameters.json.back -Force
+    #$config.items[0].exclude
+    #ConvertTo-Json $config
     $config | ConvertTo-Json | out-file -FilePath parameters.json
     
 }
