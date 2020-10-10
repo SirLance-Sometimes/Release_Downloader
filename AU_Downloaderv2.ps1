@@ -22,7 +22,7 @@ function main {
 
 function get-confiugration {
     try {
-        $content = Get-Content parameters.json | ConvertFrom-Json
+        $content = Get-Content parameters.json -ErrorAction Stop | ConvertFrom-Json 
         Write-Information "Configuration file parameters.json found and loaded"
         return $content
     }
@@ -47,7 +47,7 @@ function publish-config {
         )
     }
 
-    $template | ConvertTo-Json | Out-File parameter.json
+    $template | ConvertTo-Json | Out-File parameters.json
     Write-Host "No configuration file was found, a template configuration file was built as parameter.json"
     Write-Host "Populate parameter.json with repo information to use this program"
     Write-Host "Program is exiting, rerun after paramters.json is populated"
