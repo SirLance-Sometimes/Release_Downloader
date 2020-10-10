@@ -29,6 +29,7 @@ function get-confiugration {
     catch [System.Management.Automation.ItemNotFoundException] {
         # if not found create a new configuration file
         Write-Information "Configuration file not found"
+        publish-config
     }
     
 }
