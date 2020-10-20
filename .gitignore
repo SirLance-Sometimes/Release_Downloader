@@ -2,3 +2,6 @@
 *.back
 amonguscapture\*
 parameters.json
+*.log
+*.txt
+*linux*
