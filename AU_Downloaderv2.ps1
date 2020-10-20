@@ -1,7 +1,28 @@
+$logfile = "repo_download.log"
+
+function log {
+    param (
+        [string]$message,
+        [int]$level
+    )
+    switch ($level)
+{
+        1 {$levelText = "DEBUG"}
+        2 {$levelText = "INFO"}
+        3 {$levelText = "WARN"}
+        4 {$levelText = "ERROR"}
+        5 {$levelText = "CRITICAL"}
+}
+
+    ((get-date -Format 'yyyy-mm-dd hh:mm:ss.fff').ToString() + " :: " + $levelText + " :: " + $message ) >> $logfile
+
+}
+
 function main {
     $config = get-confiugration
     foreach ($repo in $config.items){
         #Write-Information "Checking repo: " + $repo.repository
+        log -level 2 -message ("checking repo: " + $repo.repository)
         $repoData = get-repoData $repo
         Write-debug "repo data debug"
         #write-debug "Repo files:" + $repoData.files
