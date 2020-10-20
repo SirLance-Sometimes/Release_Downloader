@@ -21,7 +21,6 @@ function log {
 function main {
     $config = get-confiugration
     foreach ($repo in $config.items){
-        #Write-Information "Checking repo: " + $repo.repository
         log -level 2 -message ("checking repo: " + $repo.repository)
         $repoData = get-repoData $repo
         Write-debug "repo data debug"
