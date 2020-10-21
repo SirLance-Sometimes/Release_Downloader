@@ -83,10 +83,8 @@ function parse-repoItems {
     $data = New-Object -TypeName psobject
     $data | Add-Member -MemberType NoteProperty -Name "version" -Value $repoItems.id
     $data | Add-Member -MemberType NoteProperty -Name "files" -Value @()
-    #write-host "repo full object"
     foreach ($item in $repoItems.assets) {
-        #Write-Host "browser url in items"
-        #write-host $item.browser_download_url
+        Write-Debug "parse-repoItems item.browser_download_url: $($item.browser_download_url)"
         $repoValues = New-Object -TypeName psobject
         $repoValues | Add-Member -MemberType NoteProperty -Name download_url -Value $item.browser_download_url
         $repoValues | Add-Member -MemberType NoteProperty -Name filename -Value $item.name
