@@ -1,22 +1,5 @@
 $logfile = "repo_download.log"
 
-function log {
-    param (
-        [string]$message,
-        [int]$level
-    )
-    switch ($level)
-{
-        1 {$levelText = "DEBUG"}
-        2 {$levelText = "INFO"}
-        3 {$levelText = "WARN"}
-        4 {$levelText = "ERROR"}
-        5 {$levelText = "CRITICAL"}
-}
-
-    ((get-date -Format 'yyyy-mm-dd hh:mm:ss.fff').ToString() + " :: " + $levelText + " :: " + $message ) >> $logfile
-
-}
 
 function main {
     $config = get-confiugration
