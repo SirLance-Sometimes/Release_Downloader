@@ -1,6 +1,7 @@
 $logfile = "repo_download.log"
-
-
+$StartTime = get-date -Format 'yyyy-mm-dd hh:mm:ss.fff'
+Start-Transcript -Path $logfile -Append -NoClobber
+Write-Information "$StartTime Script started"
 function main {
     $config = get-confiugration
     foreach ($repo in $config.items){
@@ -130,3 +131,8 @@ function update-config {
 }
 
 main
+$EndTime = Get-Date -Format 'yyyy-mm-dd hh:mm:ss.fff'
+Write-information "$EndTime Script finished"
+$TimeSpan = New-TimeSpan -Start $StartTime -End $EndTime
+Write-information "Script runtime was $($TimeSpan.Hours) hours, $($TimeSpan.Minutes) minutes, $($TimeSpan.Seconds) seconds."
+Stop-Transcript
