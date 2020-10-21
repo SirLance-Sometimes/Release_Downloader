@@ -66,7 +66,7 @@ function get-repoData {
     )
     $repo = $repoConfigData.repository
     $repo_URL = "https://api.github.com/repos/$repo/releases"
-    #Write-Host $repo_URL
+    Write-debug "get-repoData repo URL $($repo_URL)"
     try {
         $repoData = (Invoke-WebRequest $repo_URL | ConvertFrom-Json)[0]
     }
