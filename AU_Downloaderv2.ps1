@@ -107,12 +107,12 @@ function get-filedownload {
     }
     foreach($file in $fileList.files){
         #todo This should be a check agaisn't a list from the configuration file, an exclude list.
-        #write-host $file.filename
-        #write-host $exclude
+        Write-Debug "get-filedownload file.filename $($file.filename)"
+        Write-Debug "get-filedownload exclude $($exclude)"
         if( -not ($exclude -contains $file.filename)){
             $temp_path = $path + $file.filename
             $request = $file.download_url
-            #Write-Host $file.download_url
+            Write-Debug "get-filedownload file.download_url $($file.download_url)"
             Invoke-WebRequest $request -OutFile $temp_path
         }
     }
