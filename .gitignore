@@ -1,7 +1,7 @@
 *.exe
 *.back
 amonguscapture\*
-parameters.json
+/parameters.json
 *.log
 *.txt
 *linux*
