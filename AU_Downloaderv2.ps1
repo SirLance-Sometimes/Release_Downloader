@@ -98,7 +98,7 @@ function get-filedownload {
     param (
         [psobject]$fileList,
         [string]$folder,
-        [string[]]$exclude
+        [string]$exclude
     )
     if($folder -eq ""){
         $path = ""
@@ -121,9 +121,18 @@ function get-filedownload {
 
 function cleanup-files {
     param (
-        [string]$folder
-        [stirng[]]$cleanupTypes
+        [string]$folder,
+        [string]$cleanupTypes
     )
+    if($folder -eq ""){
+        $path = ""
+    }
+    else {
+        $path = $folder + "\"
+    }
+    foreach($type in $cleanupTypes){
+        Remove-Item "$($path)*.$($cleanupTypes)"
+    }
 }
 
 function update-config {
