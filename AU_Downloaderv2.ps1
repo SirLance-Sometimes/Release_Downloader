@@ -13,6 +13,7 @@ function main {
         write-debug "Repo data: $($repoData)"
         if ($repoData.version -ne $repo.version ){                           # check if version is different
             Write-Information "$($repo.repository) has been updated"
+            cleanup-files -folder $repo.folder -cleanupTypes $repo.cleanupTypes
             get-filedownload -fileList $repoData -folder $repo.folder -exclude $repo.exclude  # downloads the files and writes them to disk
             Write-debug "repo version before update: $($repo.version)"
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
@@ -116,6 +117,13 @@ function get-filedownload {
             Invoke-WebRequest $request -OutFile $temp_path
         }
     }
+}
+
+function cleanup-files {
+    param (
+        [string]$folder
+        [stirng[]]$cleanupTypes
+    )
 }
 
 function update-config {
