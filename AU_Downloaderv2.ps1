@@ -13,6 +13,7 @@ function main {
         write-debug "Repo data: $($repoData)"
         if ($repoData.version -ne $repo.version ){                           # check if version is different
             Write-Information "$($repo.repository) has been updated"
+            cleanup-files -folder $repo.folder -cleanupTypes $repo.cleanupTypes
             get-filedownload -fileList $repoData -folder $repo.folder -exclude $repo.exclude  # downloads the files and writes them to disk
             Write-debug "repo version before update: $($repo.version)"
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
@@ -97,7 +98,7 @@ function get-filedownload {
     param (
         [psobject]$fileList,
         [string]$folder,
-        [string[]]$exclude
+        [string]$exclude
     )
     if($folder -eq ""){
         $path = ""
@@ -115,6 +116,22 @@ function get-filedownload {
             Write-Debug "get-filedownload file.download_url $($file.download_url)"
             Invoke-WebRequest $request -OutFile $temp_path
         }
+    }
+}
+
+function cleanup-files {
+    param (
+        [string]$folder,
+        [string]$cleanupTypes
+    )
+    if($folder -eq ""){
+        $path = ""
+    }
+    else {
+        $path = $folder + "\"
+    }
+    foreach($type in $cleanupTypes){
+        Remove-Item "$($path)*.$($cleanupTypes)"
     }
 }
 
