@@ -4,6 +4,7 @@ $logfile = "repo_download.log"
 $StartTime = get-date -Format 'yyyy-mm-dd hh:mm:ss.fff'
 Start-Transcript -Path $logfile -Append -NoClobber
 Write-Information "$StartTime Script started"
+$ProgressPreference = 'SilentlyContinue'
 function main {
     $config = get-confiugration
     foreach ($repo in $config.items){
@@ -14,7 +15,7 @@ function main {
         if ($repoData.version -ne $repo.version ){                           # check if version is different
             Write-Information "$($repo.repository) has been updated"
             cleanup-files -folder $repo.folder -cleanupTypes $repo.cleanupTypes
-            get-filedownload -fileList $repoData -folder $repo.folder -exclude $repo.exclude  # downloads the files and writes them to disk
+            get-filedownload -fileList $repoData -folder $repo.folder -exclude $repo.exclude -filters $repo.filters # downloads the files and writes them to disk
             Write-debug "repo version before update: $($repo.version)"
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
             Write-Debug "repo version after update: $($repo.version)"
@@ -98,7 +99,8 @@ function get-filedownload {
     param (
         [psobject]$fileList,
         [string]$folder,
-        [string]$exclude
+        [string]$exclude,
+        [string]$filters
     )
     if($folder -eq ""){
         $path = ""
@@ -106,11 +108,12 @@ function get-filedownload {
     else {
         $path = $folder + "\"
     }
+    Write-Debug "get-filedownload $fileList.files $($fileList.files)"
     foreach($file in $fileList.files){
         #todo This should be a check agaisn't a list from the configuration file, an exclude list.
         Write-Debug "get-filedownload file.filename $($file.filename)"
         Write-Debug "get-filedownload exclude $($exclude)"
-        if( -not ($exclude -contains $file.filename)){
+        if( $exclude -notcontains $file.filename -and $file.filename -eq ( $file.filename | Select-String -Pattern $filters ) ){
             $temp_path = $path + $file.filename
             $request = $file.download_url
             Write-Debug "get-filedownload file.download_url $($file.download_url)"
