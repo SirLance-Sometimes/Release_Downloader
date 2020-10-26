@@ -1,6 +1,4 @@
-# AU_Updater
-
-After writting this code, this repo is poorly named.  At some point I may change this to something along the lines of "git releases".
+# Release_Downloader
 
 ## Purpose and intent
 
