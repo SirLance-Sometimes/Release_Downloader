@@ -142,7 +142,6 @@ function update-config {
     param (
         [psobject]$config
     )
-    Move-Item parameters.json parameters.json.back -Force
     write-debug "update-config config.items[0].exclude $($config.items[0].exclude)"
     write-debug "update-config config as json $(ConvertTo-Json $config)"
     ConvertTo-Json $config | out-file -FilePath parameters.json
