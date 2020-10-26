@@ -28,3 +28,6 @@ The fields are
 ```
 
 The version number should start at 0 before you run the program.  After that the script will update the version as it downloads newer version of code.  This value is used to determine if the files need to be download.
+
+## Releases
+Keeping with the intent, the releases are focused on being used for Among Us Discord bot and capture repositories.  For this reason, the parameters file included with the release contains those repositories.  However a parameters file can be hand written for any repository, and the template is included in the source code.
