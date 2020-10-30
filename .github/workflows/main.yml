@@ -21,9 +21,13 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Release
+      - name: Release ps1 file
         uses: actions/upload-artifact@v2
         with:
-          name: AU_Downloaderv2.ps1
           path: AU_Downloaderv2.ps1
+      - name: Release AU Paramfile
+        uses: actions/upload-artifact@v2
+        with:
+          name: parameters.json
+          path: AU_Bot/parameters.json         
           
