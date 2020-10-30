@@ -1,3 +1,4 @@
+#Requires -Modules publish-config
 function get-confiugration {
     try {
         $content = Get-Content parameters.json -ErrorAction Stop | ConvertFrom-Json
