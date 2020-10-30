@@ -24,6 +24,7 @@ jobs:
       - name: Release ps1 file
         uses: actions/upload-artifact@v2
         with:
+          name: AU_Downloaderv2.ps1
           path: AU_Downloaderv2.ps1
       - name: Release AU Paramfile
         uses: actions/upload-artifact@v2
