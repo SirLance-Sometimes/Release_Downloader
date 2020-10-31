@@ -15,6 +15,16 @@ function get-imports {
     Import-Module .\cleanup-files
     
 }
+function remove-imports {
+    remove-Module publish-config
+    remove-Module get-confiugration
+    remove-Module update-config
+    remove-Module parse-repoItems
+    remove-Module get-repoData
+    remove-Module get-fileDownload
+    remove-Module cleanup-files
+    
+}
 function main {
     get-imports
     $config = get-confiugration
@@ -36,6 +46,7 @@ function main {
         }
     }
     update-config $config
+    remove-imports
 }
 
 main
