@@ -1,7 +1,10 @@
 #Requires -Modules publish-config
-function get-confiugration {
+function get-configuration {
+    param(
+        [string]$configPath
+    )
     try {
-        $content = Get-Content parameters.json -ErrorAction Stop | ConvertFrom-Json
+        $content = Get-Content $configPath -ErrorAction Stop | ConvertFrom-Json
         Write-Information "Configuration file parameters.json found and loaded"
         return $content
     }
