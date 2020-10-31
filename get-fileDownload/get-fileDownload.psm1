@@ -16,7 +16,10 @@ function get-fileDownload {
         #todo This should be a check agaisn't a list from the configuration file, an exclude list.
         Write-Debug "get-fileDownload file.filename $($file.filename)"
         Write-Debug "get-fileDownload exclude $($exclude)"
-        if( $exclude -notcontains $file.filename -and $file.filename -eq ( $file.filename | Select-String -Pattern $filters ) ){
+        if ($filters -eq ""){
+            # todo need to do something here?
+        }
+        else if( $exclude -notcontains $file.filename -and $file.filename -eq ( $file.filename | Select-String -Pattern $filters ) ){
             $temp_path = $path + $file.filename
             $request = $file.download_url
             Write-Debug "get-fileDownload file.download_url $($file.download_url)"
