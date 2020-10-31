@@ -1,4 +1,4 @@
-#Requires -Modules publish-config
+
 function get-configuration {
     param(
         [string]$configPath
