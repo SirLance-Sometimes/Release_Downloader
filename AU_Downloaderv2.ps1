@@ -5,7 +5,13 @@ $StartTime = get-date -Format 'yyyy-mm-dd hh:mm:ss.fff'
 Start-Transcript -Path $logfile -Append -NoClobber
 Write-Information "$StartTime Script started"
 $ProgressPreference = 'SilentlyContinue'
+function get-imports {
+    Import-Module .\publish-config
+    Import-Module .\get-confiugration
+    
+}
 function main {
+    get-imports
     $config = get-confiugration
     foreach ($repo in $config.items){
         Write-information "checking repo: $($repo.repository)"
