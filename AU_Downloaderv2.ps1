@@ -5,29 +5,17 @@ $StartTime = get-date -Format 'yyyy-mm-dd hh:mm:ss.fff'
 Start-Transcript -Path $logfile -Append -NoClobber
 Write-Information "$StartTime Script started"
 $ProgressPreference = 'SilentlyContinue'
-function get-imports {
-    Import-Module .\publish-config
-    Import-Module .\get-confiugration
-    Import-Module .\update-config
-    Import-Module .\parse-repoItems
-    Import-Module .\get-repoData
-    Import-Module .\get-fileDownload
-    Import-Module .\cleanup-files
-    
-}
-function remove-imports {
-    remove-Module publish-config
-    remove-Module get-confiugration
-    remove-Module update-config
-    remove-Module parse-repoItems
-    remove-Module get-repoData
-    remove-Module get-fileDownload
-    remove-Module cleanup-files
-    
-}
+
+Import-Module .\publish-config
+Import-Module .\get-configuration
+Import-Module .\update-config
+Import-Module .\parse-repoItems
+Import-Module .\get-repoData
+Import-Module .\get-fileDownload
+Import-Module .\cleanup-files
+
 function main {
-    get-imports
-    $config = get-confiugration
+    $config = get-configuration -configPath "..\parameters.json"
     foreach ($repo in $config.items){
         Write-information "checking repo: $($repo.repository)"
         $repoData = get-repoData $repo
@@ -46,10 +34,20 @@ function main {
         }
     }
     update-config $config
-    remove-imports
 }
 
+
+
 main
+
+remove-Module publish-config
+remove-Module get-configuration
+remove-Module update-config
+remove-Module parse-repoItems
+remove-Module get-repoData
+remove-Module get-fileDownload
+remove-Module cleanup-files
+
 Write-Information $DebugPreference
 $EndTime = Get-Date -Format 'yyyy-mm-dd hh:mm:ss.fff'
 Write-information "$EndTime Script finished"
