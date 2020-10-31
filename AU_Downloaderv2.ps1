@@ -12,6 +12,7 @@ function get-imports {
     Import-Module .\parse-repoItems
     Import-Module .\get-repoData
     Import-Module .\get-fileDownload
+    Import-Module .\cleanup-files
     
 }
 function main {
@@ -36,24 +37,6 @@ function main {
     }
     update-config $config
 }
-
-function cleanup-files {
-    param (
-        [string]$folder,
-        [string]$cleanupTypes
-    )
-    if($folder -eq ""){
-        $path = ""
-    }
-    else {
-        $path = $folder + "\"
-    }
-    foreach($type in $cleanupTypes){
-        Remove-Item "$($path)*.$($cleanupTypes)"
-    }
-}
-
-
 
 main
 Write-Information $DebugPreference
