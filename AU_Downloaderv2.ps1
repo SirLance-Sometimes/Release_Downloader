@@ -24,6 +24,8 @@ function main {
         if ($repoData.version -ne $repo.version ){                           # check if version is different
             Write-Information "$($repo.repository) has been updated"
             cleanup-files -folder $repo.folder -cleanupTypes $repo.cleanupTypes
+            write-debug "config: $($config)"
+            write-debug "config.filters $($config.filters)"
             get-fileDownload -fileList $repoData -folder $repo.folder -exclude $repo.exclude -filters $repo.filters # downloads the files and writes them to disk
             Write-debug "repo version before update: $($repo.version)"
             $repo.version = $repoData.version                                # This will set the value of the repo version to the current version here and in the $config varaible
