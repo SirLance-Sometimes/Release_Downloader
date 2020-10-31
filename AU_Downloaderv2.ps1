@@ -9,6 +9,8 @@ function get-imports {
     Import-Module .\publish-config
     Import-Module .\get-confiugration
     Import-Module .\update-config
+
+    Import-Module .\get-repoData
     
 }
 function main {
@@ -34,21 +36,7 @@ function main {
     update-config $config
 }
 
-function get-repoData {
-    param(
-        [psobject]$repoConfigData
-    )
-    $repo = $repoConfigData.repository
-    $repo_URL = "https://api.github.com/repos/$repo/releases"
-    Write-debug "get-repoData repo URL $($repo_URL)"
-    try {
-        $repoData = (Invoke-WebRequest $repo_URL | ConvertFrom-Json)[0]
-    }
-    catch [System.Net.WebException]{
-        Write-Error "Network issue, repository is not accessible"
-    }
-    return parse-repoItems -repoItems $repoData
-}
+
 
 function parse-repoItems {
     param(
