@@ -15,7 +15,7 @@ $ProgressPreference = 'SilentlyContinue'
 . .\src\remove-staleVersion.ps1
 
 function main {
-    $config = get-configuration -configPath "..\parameters.json"
+    $config = get-configuration -configPath "parameters.json"
     foreach ($repo in $config.items){
         Write-information "checking repo: $($repo.repository)"
         $repoData = get-repoData $repo
