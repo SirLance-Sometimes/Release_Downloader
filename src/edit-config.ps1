@@ -1,4 +1,4 @@
-function update-config {
+function edit-config {
     param (
         [psobject]$config
     )

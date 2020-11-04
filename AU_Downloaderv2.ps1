@@ -8,7 +8,7 @@ $ProgressPreference = 'SilentlyContinue'
 
 . .\src\publish-config
 . .\src\get-configuration
-. .\src\update-config
+. .\src\edit-config
 . .\src\parse-repoItems
 . .\src\get-repoData
 . .\src\get-fileDownload
