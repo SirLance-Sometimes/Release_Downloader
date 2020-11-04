@@ -35,7 +35,7 @@ function main {
             Write-Information "$($repo.repository) has not been updated."
         }
     }
-    update-config $config
+    edit-config $config
 }
 
 
