@@ -9,7 +9,7 @@ $ProgressPreference = 'SilentlyContinue'
 . .\src\publish-config.ps1
 . .\src\get-configuration.ps1
 . .\src\edit-config.ps1
-. .\src\parse-repoItems.ps1
+. .\src\edit-repoItem.ps1
 . .\src\get-repoData.ps1
 . .\src\get-fileDownload.ps1
 . .\src\remove-staleVersion.ps1

@@ -1,4 +1,4 @@
-function parse-repoItems {
+function edit-repoItem {
     param(
         [psobject]$repoItems
     )
