@@ -6,13 +6,13 @@ Start-Transcript -Path $logfile -Append -NoClobber
 Write-Information "$StartTime Script started"
 $ProgressPreference = 'SilentlyContinue'
 
-. .\src\publish-config
-. .\src\get-configuration
-. .\src\edit-config
-. .\src\parse-repoItems
-. .\src\get-repoData
-. .\src\get-fileDownload
-. .\src\cleanup-files
+. .\src\publish-config.ps1
+. .\src\get-configuration.ps1
+. .\src\edit-config.ps1
+. .\src\parse-repoItems.ps1
+. .\src\get-repoData.ps1
+. .\src\get-fileDownload.ps1
+. .\src\remove-staleVersion.ps1
 
 function main {
     $config = get-configuration -configPath "..\parameters.json"

@@ -1,5 +1,5 @@
 
-function cleanup-files {
+function remove-staleVersion {
     param (
         [string]$folder,
         [string]$cleanupTypes
