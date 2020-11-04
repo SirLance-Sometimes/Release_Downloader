@@ -6,13 +6,13 @@ Start-Transcript -Path $logfile -Append -NoClobber
 Write-Information "$StartTime Script started"
 $ProgressPreference = 'SilentlyContinue'
 
-Import-Module .\publish-config
-Import-Module .\get-configuration
-Import-Module .\update-config
-Import-Module .\parse-repoItems
-Import-Module .\get-repoData
-Import-Module .\get-fileDownload
-Import-Module .\cleanup-files
+. .\src\publish-config
+. .\src\get-configuration
+. .\src\update-config
+. .\src\parse-repoItems
+. .\src\get-repoData
+. .\src\get-fileDownload
+. .\src\cleanup-files
 
 function main {
     $config = get-configuration -configPath "..\parameters.json"
@@ -42,13 +42,6 @@ function main {
 
 main
 
-remove-Module publish-config
-remove-Module get-configuration
-remove-Module update-config
-remove-Module parse-repoItems
-remove-Module get-repoData
-remove-Module get-fileDownload
-remove-Module cleanup-files
 
 Write-Information $DebugPreference
 $EndTime = Get-Date -Format 'yyyy-mm-dd hh:mm:ss.fff'
