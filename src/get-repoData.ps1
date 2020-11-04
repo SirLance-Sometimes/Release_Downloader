@@ -1,4 +1,3 @@
-#requires -Modules parse-repoItems
 function get-repoData {
     param(
         [psobject]$repoConfigData
@@ -12,5 +11,5 @@ function get-repoData {
     catch [System.Net.WebException]{
         Write-Error "Network issue, repository is not accessible"
     }
-    return parse-repoItems -repoItems $repoData
+    return edit-repoItem -repoItems $repoData
 }
