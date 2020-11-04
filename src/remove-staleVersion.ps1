@@ -11,6 +11,11 @@ function remove-staleVersion {
         $path = $folder + "\"
     }
     foreach($type in $cleanupTypes){
-        Remove-Item "$($path)*.$($cleanupTypes)"
+        try{
+            Remove-Item "$($path)*.$($cleanupTypes)"
+        }
+        catch [System.Management.Automation.ItemNotFoundException] {
+            write-information "no files found"
+        }
     }
 }
