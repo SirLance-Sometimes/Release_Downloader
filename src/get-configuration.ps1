@@ -13,5 +13,4 @@ function get-configuration {
         Write-Information "Configuration file not found"
         publish-config
     }
-    
 }
