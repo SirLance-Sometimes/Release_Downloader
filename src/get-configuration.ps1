@@ -12,5 +12,6 @@ function get-configuration {
         # if not found create a new configuration file
         Write-Information "Configuration file not found"
         publish-config
+        return 0
     }
 }
