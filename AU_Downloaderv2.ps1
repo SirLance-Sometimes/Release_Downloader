@@ -16,6 +16,9 @@ $ProgressPreference = 'SilentlyContinue'
 
 function main {
     $config = get-configuration -configPath "parameters.json"
+    if ($config -eq 0) {
+        exit
+    }
     foreach ($repo in $config.items){
         Write-information "checking repo: $($repo.repository)"
         $repoData = get-repoData $repo
