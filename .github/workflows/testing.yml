@@ -38,3 +38,10 @@ jobs:
           failOnWarnings: false
           # Enable/disable failing the action on PSScriptAnalyzer informational items.
           failOnInfos: false
+      - name: Python Unit Test
+        uses: onichandame/python-test-action@0.0.0
+        with:
+          # directory of test scripts
+          test_dir: tests
+          # pattern of the test script name
+          pattern: test_*.py      
