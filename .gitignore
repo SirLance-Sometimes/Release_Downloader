@@ -3,6 +3,6 @@
 amonguscapture\*
 /parameters.json
 *.log
-*.txt
+
 *linux*
 PS_AU_PY/
