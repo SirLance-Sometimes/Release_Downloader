@@ -9,9 +9,11 @@ class TestJson(unittest.TestCase):
 
 
 
-    def test_json_format(self):
+    def test_json_Template_format(self):
         self.assertEqual(type(read_json()), dict)
 
+    def test_json_AUBot_format(self):
+        self.assertEqual(type(read_json('AU_Bot\\parameters.json')), dict)
 
 if __name__ == "__main__":
     #if len(sys.argv) > 1:
